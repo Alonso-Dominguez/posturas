@@ -1,4 +1,4 @@
-# posturas
+# Gestos de navegación
 --------------
 Comandos de uso:
 
