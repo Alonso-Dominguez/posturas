@@ -6,41 +6,42 @@ import time
 mp_hands = mp.solutions.hands
 mp_drawing = mp.solutions.drawing_utils
 
-# Función para detectar gestos básicos
-def detectar_gesto(hand_landmarks):
-    dedos_arriba = []
+def dedos_arriba(hand_landmarks):
+    dedos = []
 
-    # IDs de las puntas de los dedos
     tips = [4, 8, 12, 16, 20]
 
-    for tip in tips:
-        # Pulgar (x), los demás (y)
-        if tip == 4:
+    for i, tip in enumerate(tips):
+        if i == 0:  # Pulgar
             if hand_landmarks.landmark[tip].x < hand_landmarks.landmark[tip - 1].x:
-                dedos_arriba.append(1)
+                dedos.append(1)
             else:
-                dedos_arriba.append(0)
+                dedos.append(0)
         else:
             if hand_landmarks.landmark[tip].y < hand_landmarks.landmark[tip - 2].y:
-                dedos_arriba.append(1)
+                dedos.append(1)
             else:
-                dedos_arriba.append(0)
+                dedos.append(0)
+    return dedos
 
-    # Gestos simples basados en los dedos arriba
-    if dedos_arriba == [0, 1, 0, 0, 0]:
-        return "click"
-    elif dedos_arriba == [0, 1, 1, 0, 0]:
-        return "scroll_up"
-    elif dedos_arriba == [0, 1, 1, 1, 1]:
+def detectar_gesto(dedos):
+    if dedos == [1, 1, 0, 0, 0]:
+        return "click_izquierdo"
+    elif dedos == [0, 1, 1, 0, 0]:
         return "scroll_down"
-    elif dedos_arriba == [1, 1, 1, 1, 1]:
-        return "palma"
-    elif dedos_arriba == [0, 0, 0, 0, 0]:
-        return "puño"
+    elif dedos == [0, 1, 1, 1, 0]:
+        return "scroll_up"
+    elif dedos == [0, 1, 1, 1, 1]:
+        return "back"
+    elif dedos == [1, 1, 1, 1, 1]:
+        return "click_derecho"
+    elif dedos == [0, 0, 0, 0, 0]:
+        return "cerrar_pagina"
+    elif dedos == [1, 0, 0, 0, 0]:
+        return "restaurar_pagina"
     else:
         return "nada"
 
-# Evitar acciones múltiples seguidas
 ultimo_gesto = ""
 tiempo_ultimo = time.time()
 
@@ -52,38 +53,41 @@ with mp_hands.Hands(min_detection_confidence=0.7, min_tracking_confidence=0.5) a
         if not ret:
             break
 
-        # Imagen espejo
         frame = cv2.flip(frame, 1)
         image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         results = hands.process(image)
-
         image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
 
         if results.multi_hand_landmarks:
             for hand_landmarks in results.multi_hand_landmarks:
                 mp_drawing.draw_landmarks(image, hand_landmarks, mp_hands.HAND_CONNECTIONS)
 
-                gesto = detectar_gesto(hand_landmarks)
+                dedos = dedos_arriba(hand_landmarks)
+                gesto = detectar_gesto(dedos)
 
-                # Mostrar el gesto
                 cv2.putText(image, f"Gesto: {gesto}", (10, 50),
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
 
-                # Ejecutar acción si es nuevo gesto
-                if gesto != "nada" and (gesto != ultimo_gesto or time.time() - tiempo_ultimo > 2):
-                    if gesto == "click":
+                if gesto != "nada" and (gesto != ultimo_gesto or time.time() - tiempo_ultimo > 1.5):
+                    if gesto == "click_izquierdo":
                         pyautogui.click()
-                    elif gesto == "scroll_up":
-                        pyautogui.scroll(300)
+                    elif gesto == "click_derecho":
+                        pyautogui.rightClick()
                     elif gesto == "scroll_down":
                         pyautogui.scroll(-300)
-                    elif gesto == "puño":
-                        pyautogui.hotkey('alt', 'tab')
+                    elif gesto == "scroll_up":
+                        pyautogui.scroll(300)
+                    elif gesto == "back":
+                        pyautogui.hotkey('alt', 'left')
+                    elif gesto == "cerrar_pagina":
+                        pyautogui.hotkey('ctrl', 'w')
+                    elif gesto == "restaurar_pagina":
+                        pyautogui.hotkey('ctrl', 'shift', 't')
 
                     ultimo_gesto = gesto
                     tiempo_ultimo = time.time()
 
-        cv2.imshow('Control por gestos', image)
+        cv2.imshow('Gesture Navigator 🖐️🧠', image)
 
         if cv2.waitKey(5) & 0xFF == ord('q'):
             break
