@@ -1,18 +1,18 @@
-# 🤖 Sistema de Reconocimiento de Gestos en Tiempo Real
+# Sistema de Reconocimiento de Gestos en Tiempo Real
 
 ![Python](https://img.shields.io/badge/python-v3.8+-blue.svg)
 ![OpenCV](https://img.shields.io/badge/OpenCV-4.x-green.svg)
 ![MediaPipe](https://img.shields.io/badge/MediaPipe-0.10+-red.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
-## 📋 Descripción del Proyecto
+## Descripción del Proyecto
 
 Este proyecto implementa un **sistema inteligente de reconocimiento de gestos de mano** que utiliza **Machine Learning** y **Computer Vision** para clasificar y ejecutar acciones basadas en gestos capturados en tiempo real a través de la webcam.
 
-### 🎯 Objetivo
+### Objetivo
 Desarrollar una aplicación que pueda reconocer automáticamente gestos de mano específicos y ejecutar acciones predefinidas, simulando un sistema de control por gestos para aplicaciones multimedia.
 
-### 🔧 Tecnologías Utilizadas
+### Tecnologías Utilizadas
 - **Python 3.8+**
 - **MediaPipe** - Extracción de landmarks de manos
 - **OpenCV** - Procesamiento de video e interfaz visual
@@ -20,17 +20,17 @@ Desarrollar una aplicación que pueda reconocer automáticamente gestos de mano 
 - **Pandas & NumPy** - Manipulación de datos
 - **Matplotlib & Seaborn** - Visualización de resultados
 
-## 🎯 Gestos Reconocidos
+## Gestos Reconocidos
 
 | Gesto | Descripción | Acción Simulada |
 |-------|-------------|-----------------|
-| **✊ Cerrado** | Puño cerrado | ⏸️ Pausar |
-| **✋ Abierto** | Mano completamente abierta | ▶️ Reproducir |
+| **✊ Cerrado** | Puño cerrado | ⏸ Pausar |
+| **✋ Abierto** | Mano completamente abierta | ▶ Reproducir |
 | **👍 Pulgar Arriba** | Like/Me gusta | 👍 Me Gusta |
 | **✌️ Paz** | Señal de paz (V) | ✌️ Compartir |
 | **👉 Apuntar** | Dedo índice señalando | 👉 Siguiente |
 
-## 🚀 Características Principales
+## Características Principales
 
 - **Captura de Dataset Personalizada**: Sistema interactivo para generar datos de entrenamiento
 - **Múltiples Modelos ML**: Comparación entre Logistic Regression y Random Forest
@@ -39,7 +39,7 @@ Desarrollar una aplicación que pueda reconocer automáticamente gestos de mano 
 - **Suavizado de Predicciones**: Buffer temporal para estabilizar resultados
 - **Interfaz Visual Intuitiva**: Feedback visual con barras de confianza
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 gesture-recognition/
@@ -53,7 +53,7 @@ gesture-recognition/
 └── 📄 README.md              # Este archivo
 ```
 
-## 🛠️ Instalación y Configuración
+## Instalación y Configuración
 
 ### 1. Clonar el Repositorio
 ```bash
@@ -75,9 +75,9 @@ pip install -r requirements.txt
 ### 4. Verificar Webcam
 Asegúrate de que tu webcam esté funcionando y no esté siendo utilizada por otras aplicaciones.
 
-## 📊 Proceso de Desarrollo
+## Proceso de Desarrollo
 
-### Paso 1: Recolección de Datos 📸
+### Paso 1: Recolección de Datos
 ```bash
 python capture_dataset.py
 ```
@@ -93,7 +93,7 @@ python capture_dataset.py
 - `N`: Cambiar al siguiente gesto
 - `Q`: Finalizar captura
 
-### Paso 2: Entrenamiento del Modelo 🤖
+### Paso 2: Entrenamiento del Modelo 
 ```bash
 python train_model.py
 ```
@@ -109,7 +109,7 @@ python train_model.py
 6. **Selección automática** del mejor modelo
 7. **Guardado** de modelo y escalador
 
-### Paso 3: Reconocimiento en Tiempo Real 🎥
+### Paso 3: Reconocimiento en Tiempo Real 
 ```bash
 python real_time_recognition.py
 ```
@@ -126,7 +126,7 @@ python real_time_recognition.py
 - `+`: Aumentar umbral de confianza
 - `-`: Disminuir umbral de confianza
 
-## 📈 Resultados y Métricas
+## Resultados y Métricas
 
 ### Rendimiento del Modelo
 - **Precisión promedio**: ~95%+
@@ -139,11 +139,11 @@ python real_time_recognition.py
 Umbral 70%: Precisión=0.891, Cobertura=92%, Rechazadas=8%
 Umbral 80%: Precisión=0.923, Cobertura=85%, Rechazadas=15%
 Umbral 85%: Precisión=0.941, Cobertura=78%, Rechazadas=22%
-Umbral 90%: Precisión=0.967, Cobertura=71%, Rechazadas=29% ✅
+Umbral 90%: Precisión=0.967, Cobertura=71%, Rechazadas=29% 
 Umbral 95%: Precisión=0.983, Cobertura=54%, Rechazadas=46%
 ```
 
-## 🎮 Casos de Uso
+## Casos de Uso
 
 ### 1. Control de Multimedia
 - Control de reproductores de video/audio
@@ -160,7 +160,7 @@ Umbral 95%: Precisión=0.983, Cobertura=54%, Rechazadas=46%
 - Interacción con realidad aumentada
 - Aplicaciones educativas interactivas
 
-## 🔬 Detalles Técnicos
+## Detalles Técnicos
 
 ### Extracción de Características
 - **MediaPipe Hands**: 21 landmarks por mano
@@ -184,14 +184,14 @@ RandomForestClassifier(
 3. **Features** → ML Model → **Predicción + Confianza**
 4. **Buffer temporal** → **Suavizado** → **Acción final**
 
-## 🚧 Limitaciones Conocidas
+## Limitaciones Conocidas
 
 - **Iluminación**: Sensible a condiciones de luz extremas
 - **Fondo**: Mejor rendimiento con fondos contrastantes
 - **Distancia**: Óptimo entre 0.5-1.5 metros de la cámara
 - **Velocidad**: Gestos muy rápidos pueden no ser detectados
 
-## 🔮 Futuras Mejoras
+## Futuras Mejoras
 
 ### Técnicas
 - [ ] Implementar redes neuronales (CNN/LSTM)
@@ -205,7 +205,7 @@ RandomForestClassifier(
 - [ ] Integración con APIs de smart home
 - [ ] Dashboard de métricas en tiempo real
 
-## 👥 Equipo de Desarrollo
+## Equipo de Desarrollo
 
 | Integrante | Rol | Contribución Principal |
 |------------|-----|----------------------|
@@ -214,11 +214,11 @@ RandomForestClassifier(
 | **[Nombre 3]** | Computer Vision | Integración MediaPipe y OpenCV |
 | **[Nombre 4]** | UI/UX Developer | Interfaz visual y experiencia |
 
-## 📄 Licencia
+## Licencia
 
 Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
 
-## 🤝 Contribuciones
+## Contribuciones
 
 Las contribuciones son bienvenidas. Por favor:
 
@@ -228,13 +228,13 @@ Las contribuciones son bienvenidas. Por favor:
 4. Push a la rama (`git push origin feature/AmazingFeature`)
 5. Abre un Pull Request
 
-## 📞 Contacto
+## Contacto
 
 - **Email**: tu-email@ejemplo.com
 - **LinkedIn**: [Tu Perfil](https://linkedin.com/in/tu-perfil)
 - **GitHub**: [Tu Usuario](https://github.com/tu-usuario)
 
-## 🙏 Agradecimientos
+## Agradecimientos
 
 - **Google MediaPipe Team** por la increíble biblioteca de ML
 - **OpenCV Community** por las herramientas de computer vision
@@ -242,5 +242,3 @@ Las contribuciones son bienvenidas. Por favor:
 - **Universidad/Institución** por el apoyo académico
 
 ---
-
-⭐ **¡No olvides dar una estrella al repositorio si te resultó útil!** ⭐
