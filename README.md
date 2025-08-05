@@ -72,9 +72,6 @@ source venv/bin/activate  # En Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 4. Verificar Webcam
-Asegúrate de que tu webcam esté funcionando y no esté siendo utilizada por otras aplicaciones.
-
 ## Proceso de Desarrollo
 
 ### Paso 1: Recolección de Datos
