@@ -5,7 +5,7 @@
 ![MediaPipe](https://img.shields.io/badge/MediaPipe-0.10+-red.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
-##Integrantes:
+## Integrantes:
 
 * José Alonso Domínguez Castillo 
 * José David Esquivel Crúz
@@ -223,68 +223,55 @@ Se definieron las siguientes etapas fundamentales:
 - Reconocimiento en tiempo real: usar el modelo entrenado para detectar gestos en vivo.
 
 **2. Captura de Dataset** (capturar_dataset.py)
-Se desarrolló un script que:
 
-Usa MediaPipe para detectar los 21 puntos clave (landmarks) de una mano.
+Se desarrolló un script que usa MediaPipe para detectar los 21 puntos clave (landmarks) de una mano. Este extrae sus coordenadas (x, y) y las guarda en un archivo CSV y permite capturar gestos de forma interactiva con las teclas:
 
-Extrae sus coordenadas (x, y) y las guarda en un archivo CSV.
+- ESPACIO: Captura una muestra del gesto actual.
 
-Permite capturar gestos de forma interactiva con las teclas:
+- N: Cambia al siguiente gesto en la lista.
 
-ESPACIO: Captura una muestra del gesto actual.
-
-N: Cambia al siguiente gesto en la lista.
-
-Q: Termina la sesión de captura.
+- Q: Termina la sesión de captura.
 
 Guarda automáticamente los datos etiquetados con el nombre del gesto seleccionado.
 
 **3. Entrenamiento del Modelo** (entrenamiento_modelo.py)
-Este script lee el archivo CSV con los datos capturados.
 
-Escala los datos con StandardScaler.
+Este script lee el archivo CSV con los datos capturados y escala los datos con StandardScaler para entrena dos modelos de Machine Learning con Scikit-learn (Regresión Logística y Random Forest)
 
-Entrena dos modelos de Machine Learning con Scikit-learn:
-
-Regresión Logística
-
-Random Forest
-
-Evalúa ambos modelos y selecciona el que obtiene mayor precisión.
-
-Guarda el modelo final (modelo.pkl) y el escalador (scaler.pkl) para su uso posterior.
+Este evalúa ambos modelos y selecciona el que obtiene mayor precisión y guarda el modelo final (modelo.pkl) y el escalador (scaler.pkl) para su uso posterior.
 
 **4. Reconocimiento en Tiempo Real** (reconocimiento.py)
+
 Este script es la aplicación principal para uso en vivo. Realiza lo siguiente:
 
-Captura el video en tiempo real desde la cámara.
+- Captura el video en tiempo real desde la cámara.
 
-Usa MediaPipe para extraer los landmarks.
+- Usa MediaPipe para extraer los landmarks.
 
-Aplica el modelo entrenado para predecir el gesto mostrado.
+- Aplica el modelo entrenado para predecir el gesto mostrado.
 
-Muestra la predicción, junto con su nivel de confianza, en pantalla.
+- Muestra la predicción, junto con su nivel de confianza, en pantalla.
 
-Implementa un sistema de suavizado temporal con un buffer de predicciones para evitar falsos positivos.
+- Implementa un sistema de suavizado temporal con un buffer de predicciones para evitar falsos positivos.
 
 Acciones disponibles:
 
-Q: Salir
+- Q: Salir
 
-+ / -: Ajustar el umbral de confianza
+- + / -: Ajustar el umbral de confianza
 
 **5. Lógica del Modelo** (machin.py)
-Archivo auxiliar con funciones relacionadas a:
 
-Carga del modelo entrenado y del escalador.
+Este es un archivo auxiliar con funciones relacionadas a:
 
-Preprocesamiento del vector de entrada (landmarks).
+- Carga del modelo entrenado y del escalador.
 
-Clasificación del gesto con un umbral configurable.
+- Preprocesamiento del vector de entrada (landmarks).
+
+-Clasificación del gesto con un umbral configurable.
 
 **6. Pruebas y Ajustes**
-Se ajustaron los valores del buffer de suavizado, umbral de confianza y número de muestras por gesto.
 
-Se probó el rendimiento bajo diferentes condiciones de luz, distancia y ángulos de la mano.
+Se ajustaron los valores del buffer de suavizado, el umbral de confianza y número de muestras por gesto. Y se probó el rendimiento bajo diferentes condiciones de luz, distancia y ángulos de la mano.
 
 
