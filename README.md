@@ -30,11 +30,12 @@ El objetivo de este proyecto es el desarrollar una aplicación que pueda reconoc
 
 | Gesto | Descripción | Acción Simulada |
 |-------|-------------|-----------------|
-| **✊ Cerrado** | Puño cerrado | ⏸ Pausar |
-| **✋ Abierto** | Mano completamente abierta | ▶ Reproducir |
-| **👍 Pulgar Arriba** | Like/Me gusta | 👍 Me Gusta |
-| **✌️ Paz** | Señal de paz (V) | ✌️ Compartir |
-| **👉 Apuntar** | Dedo índice señalando | 👉 Siguiente |
+| **✊ Cerrado** | Puño cerrado | ⏸ Pausar/Reanudar video |
+| **✋ Abierto** | Mano completamente abierta | 🔊 Subir volumen |
+| **👍 Pulgar Arriba** | Like/Me gusta | 👍 Dar "Me gusta" |
+| **✌️ Paz** | Señal de paz (V) | Adelantar 10 segundos |
+| **👉 Apuntar** | Dedo índice señalando | ⏭️ Siguiente video |
+
 
 ## Características Principales
 
@@ -52,11 +53,11 @@ gesture-recognition/
 ├── 📄 capturar_dataset.py      # Captura de datos de entrenamiento
 ├── 📄 entrenamiento_modelo.py          # Entrenamiento de modelos ML
 ├── 📄 reconocimiento.py # Aplicación de reconocimiento
+├── 📄 youtube_gesture_control.py  # 🎬 Control gestual de YouTube
 ├── 📄 gesture_dataset.csv     # Dataset generado (después de captura)
 ├── 📄 gesture_model.pkl       # Modelo entrenado (después de training)
 ├── 📄 gesture_scaler.pkl      # Escalador de datos
 ├── 📄 requirements.txt        # Dependencias del proyecto
-├── 📄 machin.py               # Script alternativo de reconocimiento de gestos
 └── 📄 README.md              # Este archivo
 ```
 
@@ -83,7 +84,7 @@ pip install -r requirements.txt
 
 ### Paso 1: Recolección de Datos
 ```bash
-python capture_dataset.py
+python capturar_dataset.py
 ```
 
 **Funcionalidades:**
@@ -99,7 +100,7 @@ python capture_dataset.py
 
 ### Paso 2: Entrenamiento del Modelo 
 ```bash
-python train_model.py
+python entrenamiento_modelo.py
 ```
 
 **Proceso automático:**
@@ -115,7 +116,7 @@ python train_model.py
 
 ### Paso 3: Reconocimiento en Tiempo Real 
 ```bash
-python real_time_recognition.py
+python reconocimiento.py
 ```
 
 **Características avanzadas:**
@@ -130,22 +131,7 @@ python real_time_recognition.py
 - `+`: Aumentar umbral de confianza
 - `-`: Disminuir umbral de confianza
 
-## Resultados y Métricas
 
-### Rendimiento del Modelo
-- **Precisión promedio**: ~95%+
-- **Confianza mínima**: 90% para activar acciones
-- **Latencia**: <50ms por frame
-- **FPS**: 25-30 en tiempo real
-
-### Análisis de Umbrales
-```
-Umbral 70%: Precisión=0.891, Cobertura=92%, Rechazadas=8%
-Umbral 80%: Precisión=0.923, Cobertura=85%, Rechazadas=15%
-Umbral 85%: Precisión=0.941, Cobertura=78%, Rechazadas=22%
-Umbral 90%: Precisión=0.967, Cobertura=71%, Rechazadas=29% 
-Umbral 95%: Precisión=0.983, Cobertura=54%, Rechazadas=46%
-```
 ## Limitaciones Conocidas
 
 - **Iluminación**: Sensible a condiciones de luz extremas
@@ -204,18 +190,94 @@ Acciones disponibles:
 
 * + / - : Ajustar el umbral de confianza
 
-**5. Lógica del Modelo** (machin.py)
+## 🎬 Aplicación Práctica - Control de YouTube
 
-Este es un archivo auxiliar con funciones relacionadas a:
+### Control Gestual de YouTube 🎮
+```bash
+python youtube_gesture_control.py
+```
 
-- Carga del modelo entrenado y del escalador.
+Esta aplicación revolucionaria permite controlar YouTube directamente con gestos de mano, creando una experiencia completamente hands-free.
 
-- Preprocesamiento del vector de entrada (landmarks).
+### 🚀 Demostración de Uso
 
-- Clasificación del gesto con un umbral configurable.
+#### **1. Inicio de la Aplicación**
+Al ejecutar el script, se abre automáticamente la interfaz:
 
-**6. Pruebas y Ajustes**
+![Interfaz Principal](assets/inicio.png)
+*Interfaz principal mostrando la detección de manos en tiempo real*
 
-Se ajustaron los valores del buffer de suavizado, el umbral de confianza y número de muestras por gesto. Y se probó el rendimiento bajo diferentes condiciones de luz, distancia y ángulos de la mano.
+La aplicación detecta automáticamente tu mano y muestra:
+- **Panel de información** con el gesto actual
+- **Barra de confianza** en tiempo real
+- **Estado de las acciones** ejecutadas
+- **Controles disponibles** en el lateral
+
+#### **2. Ejemplo: Pausar Video con Gesto de Puño**
+
+![Gesto Pausar](assets/puño_cerrado.png)
+
+*Detección del gesto "puño cerrado" para pausar el video*
+
+**Proceso paso a paso:**
+1. **Detección**: La cámara detecta tu mano y extrae los 21 landmarks
+2. **Clasificación**: El modelo ML identifica el gesto como "CERRADO"
+3. **Confianza**: Verifica que la confianza sea superior al 90%
+4. **Acción**: Envía automáticamente la tecla `SPACE` a YouTube
+5. **Resultado**: El video se pausa instantáneamente
+
+![Video Pausado](assets/video_pausado.png)
+*Video de YouTube pausado exitosamente mediante gesto*
+
+#### **3. Control de Volumen con Mano Abierta**
+
+*Gesto de mano abierta aumentando el volumen*
+
+Cuando detecta una **mano completamente abierta**:
+- El sistema reconoce el gesto "ABIERTO"
+- Envía la tecla `↑` (flecha arriba)
+- YouTube aumenta automáticamente el volumen
 
 
+### 🎯 Características Especiales
+
+#### **Sistema de Seguridad Inteligente:**
+- **Cooldown de 2 segundos**: Previene acciones accidentales repetidas
+- **Umbral de confianza**: Solo ejecuta con 90%+ de certeza
+- **Control de pausa**: Tecla `P` para pausar/reanudar el control gestual
+
+#### **Feedback Visual Avanzado:**
+```
+🎬 CONTROL GESTUAL DE YOUTUBE
+Estado: ACTIVO
+Gesto: CERRADO ✊
+Accion: ✅ ⏯️ PAUSAR/REANUDAR
+Confianza: 94% | Estabilidad: 87%
+```
+
+#### **Compatibilidad Universal:**
+- ✅ **Chrome, Firefox, Safari, Edge**
+- ✅ **YouTube, YouTube Music, YouTube TV**
+- ✅ **Windows, macOS, Linux**
+- ✅ **Pantalla completa y modo ventana**
+
+### 🛠 Configuración Técnica
+
+#### **Requisitos del Sistema:**
+- **Cámara web** funcional (mínimo 720p recomendado)
+- **Iluminación adecuada** (evitar contraluz)
+- **Distancia óptima**: 50cm - 1.5m de la cámara
+- **RAM**: Mínimo 4GB (8GB recomendado)
+- **CPU**: Soporte para procesamiento en tiempo real
+
+#### **Instalación de Dependencias Adicionales:**
+```bash
+pip install pyautogui pynput
+```
+
+#### **Configuración Inicial:**
+1. **Abrir YouTube** en tu navegador preferido
+2. **Reproducir cualquier video**
+3. **Hacer clic en el video** (importante para el foco)
+4. **Ejecutar la aplicación**
+5. **¡Disfrutar del control gestual!**
