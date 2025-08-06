@@ -256,9 +256,9 @@ Este script es la aplicación principal para uso en vivo. Realiza lo siguiente:
 
 Acciones disponibles:
 
-- Q: Salir
+* Q: Salir
 
-- + / - : Ajustar el umbral de confianza
+* + / - : Ajustar el umbral de confianza
 
 **5. Lógica del Modelo** (machin.py)
 
@@ -268,7 +268,7 @@ Este es un archivo auxiliar con funciones relacionadas a:
 
 - Preprocesamiento del vector de entrada (landmarks).
 
--Clasificación del gesto con un umbral configurable.
+- Clasificación del gesto con un umbral configurable.
 
 **6. Pruebas y Ajustes**
 
