@@ -5,12 +5,18 @@
 ![MediaPipe](https://img.shields.io/badge/MediaPipe-0.10+-red.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
+##Integrantes:
+
+* José Alonso Domínguez Castillo 
+* José David Esquivel Crúz
+* Aldo Jesús Martinez Larios
+
 ## Descripción del Proyecto
 
-Este proyecto implementa un **sistema inteligente de reconocimiento de gestos de mano** que utiliza **Machine Learning** y **Computer Vision** para clasificar y ejecutar acciones basadas en gestos capturados en tiempo real a través de la webcam.
+El fin de este proyecto es implementar un sistema inteligente de reconocimiento de gestos de mano que utiliza Machine Learning y Computer Vision para clasificar y ejecutar acciones basadas en gestos capturados en tiempo real a través de la webcam.
 
 ### Objetivo
-Desarrollar una aplicación que pueda reconocer automáticamente gestos de mano específicos y ejecutar acciones predefinidas, simulando un sistema de control por gestos para aplicaciones multimedia.
+El objetivo de este proyecto es el desarrollar una aplicación que pueda reconocer automáticamente gestos de mano específicos y ejecutar acciones predefinidas, simulando un sistema de control por gestos para aplicaciones multimedia.
 
 ### Tecnologías Utilizadas
 - **Python 3.8+**
@@ -32,12 +38,12 @@ Desarrollar una aplicación que pueda reconocer automáticamente gestos de mano 
 
 ## Características Principales
 
-- **Captura de Dataset Personalizada**: Sistema interactivo para generar datos de entrenamiento
+- **Captura de Dataset Personalizada**: Un sistema interactivo que permite generar datos de entrenamiento
 - **Múltiples Modelos ML**: Comparación entre Logistic Regression y Random Forest
-- **Reconocimiento en Tiempo Real**: Procesamiento de video con baja latencia
+- **Reconocimiento en Tiempo Real**: Un procesamiento de video con baja latencia
 - **Sistema de Confianza**: Umbrales ajustables para mejorar precisión
-- **Suavizado de Predicciones**: Buffer temporal para estabilizar resultados
-- **Interfaz Visual Intuitiva**: Feedback visual con barras de confianza
+- **Suavizado de Predicciones**: Cuenta con un buffer temporal para estabilizar resultados
+- **Interfaz Visual Intuitiva**: Un feedback visual con barras de confianza
 
 ## Estructura del Proyecto
 
@@ -202,40 +208,83 @@ RandomForestClassifier(
 - [ ] Integración con APIs de smart home
 - [ ] Dashboard de métricas en tiempo real
 
-## Equipo de Desarrollo
-
-| Integrante | Rol | Contribución Principal |
-|------------|-----|----------------------|
-| **[Tu Nombre]** | Lead Developer | Arquitectura del sistema y ML |
-| **[Nombre 2]** | Data Scientist | Análisis de datos y optimización |
-| **[Nombre 3]** | Computer Vision | Integración MediaPipe y OpenCV |
-| **[Nombre 4]** | UI/UX Developer | Interfaz visual y experiencia |
-
-## Licencia
-
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
-
-## Contribuciones
-
-Las contribuciones son bienvenidas. Por favor:
-
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
-
-## Contacto
-
-- **Email**: tu-email@ejemplo.com
-- **LinkedIn**: [Tu Perfil](https://linkedin.com/in/tu-perfil)
-- **GitHub**: [Tu Usuario](https://github.com/tu-usuario)
-
-## Agradecimientos
-
-- **Google MediaPipe Team** por la increíble biblioteca de ML
-- **OpenCV Community** por las herramientas de computer vision
-- **Scikit-learn Contributors** por los algoritmos de ML
-- **Universidad/Institución** por el apoyo académico
-
 ---
+
+## Proceso de Implementación
+Este proyecto fue desarrollado siguiendo una serie de pasos estructurados para lograr un sistema funcional de reconocimiento de gestos por webcam. A continuación, se detalla el proceso completo:
+
+**1. Diseño del flujo de trabajo**
+Se definieron las siguientes etapas fundamentales:
+
+- Captura de datos: obtener muestras de gestos con la webcam.
+
+- Entrenamiento del modelo: procesar las muestras y entrenar un clasificador.
+
+- Reconocimiento en tiempo real: usar el modelo entrenado para detectar gestos en vivo.
+
+**2. Captura de Dataset** (capturar_dataset.py)
+Se desarrolló un script que:
+
+Usa MediaPipe para detectar los 21 puntos clave (landmarks) de una mano.
+
+Extrae sus coordenadas (x, y) y las guarda en un archivo CSV.
+
+Permite capturar gestos de forma interactiva con las teclas:
+
+ESPACIO: Captura una muestra del gesto actual.
+
+N: Cambia al siguiente gesto en la lista.
+
+Q: Termina la sesión de captura.
+
+Guarda automáticamente los datos etiquetados con el nombre del gesto seleccionado.
+
+**3. Entrenamiento del Modelo** (entrenamiento_modelo.py)
+Este script lee el archivo CSV con los datos capturados.
+
+Escala los datos con StandardScaler.
+
+Entrena dos modelos de Machine Learning con Scikit-learn:
+
+Regresión Logística
+
+Random Forest
+
+Evalúa ambos modelos y selecciona el que obtiene mayor precisión.
+
+Guarda el modelo final (modelo.pkl) y el escalador (scaler.pkl) para su uso posterior.
+
+**4. Reconocimiento en Tiempo Real** (reconocimiento.py)
+Este script es la aplicación principal para uso en vivo. Realiza lo siguiente:
+
+Captura el video en tiempo real desde la cámara.
+
+Usa MediaPipe para extraer los landmarks.
+
+Aplica el modelo entrenado para predecir el gesto mostrado.
+
+Muestra la predicción, junto con su nivel de confianza, en pantalla.
+
+Implementa un sistema de suavizado temporal con un buffer de predicciones para evitar falsos positivos.
+
+Acciones disponibles:
+
+Q: Salir
+
++ / -: Ajustar el umbral de confianza
+
+**5. Lógica del Modelo** (machin.py)
+Archivo auxiliar con funciones relacionadas a:
+
+Carga del modelo entrenado y del escalador.
+
+Preprocesamiento del vector de entrada (landmarks).
+
+Clasificación del gesto con un umbral configurable.
+
+**6. Pruebas y Ajustes**
+Se ajustaron los valores del buffer de suavizado, umbral de confianza y número de muestras por gesto.
+
+Se probó el rendimiento bajo diferentes condiciones de luz, distancia y ángulos de la mano.
+
+
