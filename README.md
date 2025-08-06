@@ -49,13 +49,14 @@ El objetivo de este proyecto es el desarrollar una aplicación que pueda reconoc
 
 ```
 gesture-recognition/
-├── 📄 capture_dataset.py      # Captura de datos de entrenamiento
-├── 📄 train_model.py          # Entrenamiento de modelos ML
-├── 📄 real_time_recognition.py # Aplicación de reconocimiento
+├── 📄 capturar_dataset.py      # Captura de datos de entrenamiento
+├── 📄 entrenamiento_modelo.py          # Entrenamiento de modelos ML
+├── 📄 reconocimiento.py # Aplicación de reconocimiento
 ├── 📄 gesture_dataset.csv     # Dataset generado (después de captura)
 ├── 📄 gesture_model.pkl       # Modelo entrenado (después de training)
 ├── 📄 gesture_scaler.pkl      # Escalador de datos
 ├── 📄 requirements.txt        # Dependencias del proyecto
+├── 📄 machin.py               # Script alternativo de reconocimiento de gestos
 └── 📄 README.md              # Este archivo
 ```
 
@@ -145,31 +146,6 @@ Umbral 85%: Precisión=0.941, Cobertura=78%, Rechazadas=22%
 Umbral 90%: Precisión=0.967, Cobertura=71%, Rechazadas=29% 
 Umbral 95%: Precisión=0.983, Cobertura=54%, Rechazadas=46%
 ```
-
-## Detalles Técnicos
-
-### Extracción de Características
-- **MediaPipe Hands**: 21 landmarks por mano
-- **Coordenadas normalizadas**: (x, y) relativas al frame
-- **Vector de características**: 42 dimensiones por muestra
-- **Preprocesamiento**: StandardScaler para normalización
-
-### Arquitectura del Modelo
-```python
-# Mejor configuración encontrada
-RandomForestClassifier(
-    n_estimators=100,
-    random_state=42,
-    max_depth=None
-)
-```
-
-### Pipeline de Procesamiento
-1. **Captura de frame** → MediaPipe → **Landmarks**
-2. **Landmarks** → StandardScaler → **Normalización**
-3. **Features** → ML Model → **Predicción + Confianza**
-4. **Buffer temporal** → **Suavizado** → **Acción final**
-
 ## Limitaciones Conocidas
 
 - **Iluminación**: Sensible a condiciones de luz extremas
@@ -177,13 +153,6 @@ RandomForestClassifier(
 - **Distancia**: Óptimo entre 0.5-1.5 metros de la cámara
 - **Velocidad**: Gestos muy rápidos pueden no ser detectados
 
-### Funcionalidades
-- [ ] Interfaz web con Flask/FastAPI
-- [ ] Aplicación móvil con React Native
-- [ ] Integración con APIs de smart home
-- [ ] Dashboard de métricas en tiempo real
-
----
 
 ## Proceso de Implementación
 Este proyecto fue desarrollado siguiendo una serie de pasos estructurados para lograr un sistema funcional de reconocimiento de gestos por webcam. A continuación, se detalla el proceso completo:
