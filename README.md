@@ -258,7 +258,7 @@ Acciones disponibles:
 
 - Q: Salir
 
-- + / -: Ajustar el umbral de confianza
+- + / - : Ajustar el umbral de confianza
 
 **5. Lógica del Modelo** (machin.py)
 
