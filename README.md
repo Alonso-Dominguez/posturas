@@ -5,7 +5,7 @@
 ![MediaPipe](https://img.shields.io/badge/MediaPipe-0.10+-red.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
-## Integrantes:
+### Integrantes:
 
 * José Alonso Domínguez Castillo 
 * José David Esquivel Crúz
