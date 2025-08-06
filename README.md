@@ -146,23 +146,6 @@ Umbral 90%: Precisión=0.967, Cobertura=71%, Rechazadas=29%
 Umbral 95%: Precisión=0.983, Cobertura=54%, Rechazadas=46%
 ```
 
-## Casos de Uso
-
-### 1. Control de Multimedia
-- Control de reproductores de video/audio
-- Navegación en presentaciones
-- Control de volumen gestual
-
-### 2. Accesibilidad
-- Interfaz sin contacto para personas con movilidad limitada
-- Control de dispositivos inteligentes
-- Navegación web alternativa
-
-### 3. Gaming y Entretenimiento
-- Controles gestuales para juegos
-- Interacción con realidad aumentada
-- Aplicaciones educativas interactivas
-
 ## Detalles Técnicos
 
 ### Extracción de Características
@@ -193,14 +176,6 @@ RandomForestClassifier(
 - **Fondo**: Mejor rendimiento con fondos contrastantes
 - **Distancia**: Óptimo entre 0.5-1.5 metros de la cámara
 - **Velocidad**: Gestos muy rápidos pueden no ser detectados
-
-## Futuras Mejoras
-
-### Técnicas
-- [ ] Implementar redes neuronales (CNN/LSTM)
-- [ ] Reconocimiento de gestos con ambas manos
-- [ ] Detección de gestos dinámicos (movimiento temporal)
-- [ ] Integración con landmarks faciales y corporales
 
 ### Funcionalidades
 - [ ] Interfaz web con Flask/FastAPI
