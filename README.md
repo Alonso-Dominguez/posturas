@@ -190,16 +190,16 @@ Acciones disponibles:
 
 * + / - : Ajustar el umbral de confianza
 
-## 🎬 Aplicación Práctica - Control de YouTube
+## Aplicación Práctica - Control de YouTube
 
-### Control Gestual de YouTube 🎮
+### Control Gestual de YouTube 
 ```bash
 python youtube_gesture_control.py
 ```
 
 Esta aplicación revolucionaria permite controlar YouTube directamente con gestos de mano, creando una experiencia completamente hands-free.
 
-### 🚀 Demostración de Uso
+### Demostración de Uso
 
 #### **1. Inicio de la Aplicación**
 Al ejecutar el script, se abre automáticamente la interfaz:
@@ -239,7 +239,7 @@ Cuando detecta una **mano completamente abierta**:
 - YouTube aumenta automáticamente el volumen
 
 
-### 🎯 Características Especiales
+### Características Especiales
 
 #### **Sistema de Seguridad Inteligente:**
 - **Cooldown de 2 segundos**: Previene acciones accidentales repetidas
@@ -248,20 +248,20 @@ Cuando detecta una **mano completamente abierta**:
 
 #### **Feedback Visual Avanzado:**
 ```
-🎬 CONTROL GESTUAL DE YOUTUBE
+CONTROL GESTUAL DE YOUTUBE
 Estado: ACTIVO
-Gesto: CERRADO ✊
-Accion: ✅ ⏯️ PAUSAR/REANUDAR
+Gesto: CERRADO 
+Accion: PAUSAR/REANUDAR
 Confianza: 94% | Estabilidad: 87%
 ```
 
 #### **Compatibilidad Universal:**
-- ✅ **Chrome, Firefox, Safari, Edge**
-- ✅ **YouTube, YouTube Music, YouTube TV**
-- ✅ **Windows, macOS, Linux**
-- ✅ **Pantalla completa y modo ventana**
+-  **Chrome, Firefox, Safari, Edge**
+-  **YouTube, YouTube Music, YouTube TV**
+-  **Windows, macOS, Linux**
+-  **Pantalla completa y modo ventana**
 
-### 🛠 Configuración Técnica
+### Configuración Técnica
 
 #### **Requisitos del Sistema:**
 - **Cámara web** funcional (mínimo 720p recomendado)
